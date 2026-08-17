@@ -1,0 +1,25 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark paper background -->
+  <rect width="256" height="256" rx="32" fill="#1a1714"/>
+  
+  <!-- Paper sheet -->
+  <rect x="32" y="48" width="192" height="160" rx="12" fill="#2b241c"/>
+  
+  <!-- Paper texture lines -->
+  <g stroke="#3d3328" stroke-width="1" opacity="0.3">
+    <line x1="48" y1="72" x2="208" y2="72"/>
+    <line x1="48" y1="96" x2="208" y2="96"/>
+    <line x1="48" y1="120" x2="208" y2="120"/>
+    <line x1="48" y1="144" x2="180" y2="144"/>
+  </g>
+  
+  <!-- Magnifying glass (search) -->
+  <circle cx="128" cy="112" r="28" fill="none" stroke="#a8613a" stroke-width="4"/>
+  <line x1="150" y1="150" x2="172" y2="172" stroke="#a8613a" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Small document icon in corner -->
+  <rect x="160" y="56" width="24" height="32" rx="3" fill="#a8613a" opacity="0.2"/>
+  <rect x="164" y="62" width="16" height="4" rx="1" fill="#a8613a"/>
+  <rect x="164" y="70" width="16" height="4" rx="1" fill="#a8613a" opacity="0.6"/>
+  <rect x="164" y="78" width="12" height="4" rx="1" fill="#a8613a" opacity="0.4"/>
+</svg>

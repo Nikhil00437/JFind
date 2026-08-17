@@ -1,0 +1,797 @@
+/*
+ * JFind - Dark Paper Theme
+ * A worn leather notebook aesthetic for job application tracking
+ */
+
+/* ============================================================================
+   COLOR PALETTE
+   ============================================================================ */
+@define-color bg-deep       #1a1714;  /* Deep charcoal background */
+@define-color bg-paper      #2b241c;  /* Warm sepia paper panels */
+@define-color bg-paper-hover #332a20; /* Slightly lighter on hover */
+@define-color border-subtle #3d3328;  /* Subtle paper edges */
+@define-color border-focus  #a8613a;  /* Burnt amber focus */
+@define-color text-ink      #e8dfd0;  /* Cream/off-white text */
+@define-color text-muted    #a89d8a;  /* Muted text */
+@define-color text-dim      #7a6f5e;  /* Dim text */
+@define-color accent-amber  #a8613a;  /* Primary accent - burnt amber */
+@define-color accent-hover  #c4764a;  /* Lighter amber on hover */
+@define-color accent-press  #8b4f2e;  /* Darker amber on press */
+@define-color accent-burgundy #7a2e2e; /* Secondary accent - deep burgundy */
+@define-color success-green  #5a7a4a;  /* Success green */
+@define-color warning-amber   #b8860b;  /* Warning amber */
+@define-color error-red       #a84a4a;  /* Error red */
+@define-color input-bg        #1e1a16;  /* Input background */
+@define-color input-border    #3d3328;  /* Input border */
+@define-color scrollbar-bg    #1a1714;  /* Scrollbar background */
+@define-color scrollbar-handle #4a3f33; /* Scrollbar handle */
+@define-color selection-bg    #a8613a;  /* Selection background */
+@define-color selection-text  #1a1714;  /* Selection text */
+
+/* ============================================================================
+   GLOBAL APPLICATION STYLES
+   ============================================================================ */
+
+QApplication {
+    background-color: @bg-deep;
+    color: @text-ink;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+}
+
+QWidget {
+    background-color: @bg-deep;
+    color: @text-ink;
+}
+
+/* ============================================================================
+   MAIN WINDOW
+   ============================================================================ */
+
+MainWindow {
+    background-color: @bg-deep;
+}
+
+#centralWidget {
+    background-color: @bg-deep;
+}
+
+/* ============================================================================
+   PAPER PANELS - The core "worn paper" aesthetic
+   ============================================================================ */
+
+.paper-panel, QFrame.paperPanel {
+    background-color: @bg-paper;
+    border: 1px solid @border-subtle;
+    border-radius: 8px;
+    /* Subtle paper texture via pseudo-element not possible in QSS,
+       but we simulate with inner shadow and border */
+}
+
+.paper-panel:hover {
+    background-color: @bg-paper-hover;
+    border-color: #4a3f33;
+}
+
+/* Deckle edge effect via box-shadow simulation */
+.paper-panel[deckle="true"] {
+    border: none;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+        stop:0 @bg-paper,
+        stop:0.5 @bg-paper,
+        stop:1 #251f18);
+    border-radius: 12px;
+}
+
+/* Card variant */
+.paper-card {
+    background-color: @bg-paper;
+    border: 1px solid @border-subtle;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.paper-card:hover {
+    border-color: #4a3f33;
+    background-color: @bg-paper-hover;
+}
+
+/* ============================================================================
+   TYPOGRAPHY
+   ============================================================================ */
+
+QLabel {
+    color: @text-ink;
+    background-color: transparent;
+}
+
+.heading-label {
+    font-family: "Georgia", "Crimson Pro", "Times New Roman", serif;
+    font-size: 22px;
+    font-weight: bold;
+    color: @text-ink;
+    letter-spacing: -0.5px;
+}
+
+.subheading-label {
+    font-family: "Georgia", "Crimson Pro", "Times New Roman", serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: @text-ink;
+}
+
+.body-label {
+    font-size: 13px;
+    color: @text-ink;
+    line-height: 1.5;
+}
+
+.muted-label {
+    color: @text-muted;
+    font-size: 12px;
+}
+
+.dim-label {
+    color: @text-dim;
+    font-size: 11px;
+}
+
+.link-label {
+    color: @accent-amber;
+    text-decoration: none;
+}
+
+.link-label:hover {
+    color: @accent-hover;
+    text-decoration: underline;
+}
+
+/* ============================================================================
+   URL BAR / SEARCH INPUT
+   ============================================================================ */
+
+#urlBar, QLineEdit.urlBar {
+    background-color: @input-bg;
+    border: 2px solid @input-border;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 15px;
+    color: @text-ink;
+    selection-background-color: @selection-bg;
+    selection-color: @selection-text;
+}
+
+#urlBar:focus, QLineEdit.urlBar:focus {
+    border-color: @accent-amber;
+    background-color: #221d18;
+}
+
+#urlBar::placeholder, QLineEdit.urlBar::placeholder {
+    color: @text-dim;
+    font-style: italic;
+}
+
+/* ============================================================================
+   BUTTONS
+   ============================================================================ */
+
+QPushButton {
+    background-color: @bg-paper;
+    border: 1px solid @border-subtle;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: @text-ink;
+    min-height: 20px;
+}
+
+QPushButton:hover {
+    background-color: @bg-paper-hover;
+    border-color: #4a3f33;
+}
+
+QPushButton:pressed {
+    background-color: #251f18;
+    border-color: @accent-amber;
+}
+
+QPushButton:disabled {
+    background-color: @bg-deep;
+    border-color: @border-subtle;
+    color: @text-dim;
+}
+
+QPushButton:focus {
+    border-color: @accent-amber;
+    outline: none;
+}
+
+/* Primary action button - amber accent */
+QPushButton.primary, QPushButton#primaryButton {
+    background-color: @accent-amber;
+    border-color: @accent-amber;
+    color: @bg-deep;
+    font-weight: 600;
+}
+
+QPushButton.primary:hover, QPushButton#primaryButton:hover {
+    background-color: @accent-hover;
+    border-color: @accent-hover;
+}
+
+QPushButton.primary:pressed, QPushButton#primaryButton:pressed {
+    background-color: @accent-press;
+    border-color: @accent-press;
+}
+
+/* Secondary button - subtle */
+QPushButton.secondary, QPushButton#secondaryButton {
+    background-color: transparent;
+    border-color: @border-subtle;
+    color: @text-muted;
+}
+
+QPushButton.secondary:hover, QPushButton#secondaryButton:hover {
+    background-color: @bg-paper-hover;
+    border-color: #4a3f33;
+    color: @text-ink;
+}
+
+/* Danger button - burgundy */
+QPushButton.danger, QPushButton#dangerButton {
+    background-color: @accent-burgundy;
+    border-color: @accent-burgundy;
+    color: @text-ink;
+}
+
+QPushButton.danger:hover, QPushButton#dangerButton:hover {
+    background-color: #963838;
+    border-color: #963838;
+}
+
+/* Small button variant */
+QPushButton.small {
+    padding: 6px 12px;
+    font-size: 11px;
+    min-height: 16px;
+}
+
+/* ============================================================================
+   LIST VIEW / RESULTS LIST
+   ============================================================================ */
+
+QListView, QListWidget {
+    background-color: @bg-deep;
+    border: none;
+    outline: none;
+    show-decoration-selected: 1;
+}
+
+QListView::item, QListWidget::item {
+    background-color: transparent;
+    border: none;
+    padding: 4px;
+}
+
+QListView::item:selected, QListWidget::item:selected {
+    background-color: transparent;
+}
+
+QListView::item:hover, QListWidget::item:hover {
+    background-color: transparent;
+}
+
+/* Custom item delegate will handle paper-card rendering */
+
+/* ============================================================================
+   TABLE VIEW (Job Tracker)
+   ============================================================================ */
+
+QTableView, QTableWidget {
+    background-color: @bg-deep;
+    alternate-background-color: @bg-paper;
+    gridline-color: @border-subtle;
+    border: 1px solid @border-subtle;
+    border-radius: 8px;
+    selection-background-color: @accent-amber;
+    selection-color: @bg-deep;
+    outline: none;
+}
+
+QTableView::item, QTableWidget::item {
+    padding: 10px 12px;
+    border: none;
+    border-bottom: 1px solid @border-subtle;
+}
+
+QTableView::item:selected, QTableWidget::item:selected {
+    background-color: @accent-amber;
+    color: @bg-deep;
+}
+
+QHeaderView::section {
+    background-color: @bg-paper;
+    border: none;
+    border-bottom: 2px solid @border-subtle;
+    padding: 12px;
+    font-weight: 600;
+    color: @text-ink;
+    font-family: "Georgia", "Crimson Pro", serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+QHeaderView::section:first {
+    border-top-left-radius: 8px;
+}
+
+QHeaderView::section:last {
+    border-top-right-radius: 8px;
+}
+
+/* ============================================================================
+   INPUT FIELDS (Profile Editor, Forms)
+   ============================================================================ */
+
+QLineEdit, QTextEdit, QPlainTextEdit, QComboBox, QSpinBox, QDoubleSpinBox {
+    background-color: @input-bg;
+    border: 1px solid @input-border;
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: @text-ink;
+    selection-background-color: @selection-bg;
+    selection-color: @selection-text;
+    font-size: 13px;
+}
+
+QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus, 
+QComboBox:focus, QSpinBox:focus, QDoubleSpinBox:focus {
+    border-color: @accent-amber;
+    background-color: #221d18;
+}
+
+QLineEdit:disabled, QTextEdit:disabled, QPlainTextEdit:disabled,
+QComboBox:disabled, QSpinBox:disabled, QDoubleSpinBox:disabled {
+    background-color: @bg-deep;
+    border-color: @border-subtle;
+    color: @text-dim;
+}
+
+QLineEdit::placeholder, QTextEdit::placeholder, QPlainTextEdit::placeholder {
+    color: @text-dim;
+}
+
+/* Text area specific */
+QTextEdit, QPlainTextEdit {
+    line-height: 1.6;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ComboBox */
+QComboBox {
+    min-height: 20px;
+    padding-right: 30px; /* Space for arrow */
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 24px;
+    border-left: 1px solid @input-border;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background-color: @bg-paper;
+}
+
+QComboBox::down-arrow {
+    image: none;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid @text-muted;
+    width: 0;
+    height: 0;
+    margin-right: 8px;
+}
+
+QComboBox QAbstractItemView {
+    background-color: @bg-paper;
+    border: 1px solid @border-subtle;
+    border-radius: 6px;
+    selection-background-color: @accent-amber;
+    selection-color: @bg-deep;
+    outline: none;
+    padding: 4px;
+}
+
+QComboBox QAbstractItemView::item {
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+QComboBox QAbstractItemView::item:hover {
+    background-color: @bg-paper-hover;
+}
+
+QComboBox QAbstractItemView::item:selected {
+    background-color: @accent-amber;
+    color: @bg-deep;
+}
+
+/* SpinBox */
+QSpinBox::up-button, QDoubleSpinBox::up-button,
+QSpinBox::down-button, QDoubleSpinBox::down-button {
+    subcontrol-origin: border;
+    width: 20px;
+    border: none;
+    background-color: @bg-paper;
+    border-radius: 0;
+}
+
+QSpinBox::up-button, QDoubleSpinBox::up-button {
+    subcontrol-position: top right;
+    border-top-right-radius: 6px;
+}
+
+QSpinBox::down-button, QDoubleSpinBox::down-button {
+    subcontrol-position: bottom right;
+    border-bottom-right-radius: 6px;
+}
+
+QSpinBox::up-arrow, QDoubleSpinBox::up-arrow,
+QSpinBox::down-arrow, QDoubleSpinBox::down-arrow {
+    width: 8px;
+    height: 8px;
+}
+
+/* ============================================================================
+   TAB WIDGET
+   ============================================================================ */
+
+QTabWidget::pane {
+    background-color: @bg-deep;
+    border: 1px solid @border-subtle;
+    border-radius: 8px;
+    top: -1px;
+}
+
+QTabBar::tab {
+    background-color: transparent;
+    border: none;
+    padding: 12px 24px;
+    margin-right: 4px;
+    color: @text-muted;
+    font-size: 13px;
+    font-weight: 500;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+QTabBar::tab:hover {
+    color: @text-ink;
+    background-color: @bg-paper;
+}
+
+QTabBar::tab:selected {
+    background-color: @bg-paper;
+    color: @text-ink;
+    border-bottom: 2px solid @accent-amber;
+}
+
+/* ============================================================================
+   SCROLL BARS
+   ============================================================================ */
+
+QScrollBar:vertical, QScrollBar:horizontal {
+    background-color: @scrollbar-bg;
+    width: 10px;
+    height: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical, QScrollBar::handle:horizontal {
+    background-color: @scrollbar-handle;
+    border-radius: 5px;
+    min-height: 30px;
+    min-width: 30px;
+}
+
+QScrollBar::handle:vertical:hover, QScrollBar::handle:horizontal:hover {
+    background-color: #5a4f40;
+}
+
+QScrollBar::add-line, QScrollBar::sub-line {
+    height: 0;
+    width: 0;
+}
+
+QScrollBar::add-page, QScrollBar::sub-page {
+    background: none;
+}
+
+/* ============================================================================
+   TOOLTIP
+   ============================================================================ */
+
+QToolTip {
+    background-color: @bg-paper;
+    border: 1px solid @border-subtle;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: @text-ink;
+    font-size: 12px;
+}
+
+/* ============================================================================
+   MENU BAR / CONTEXT MENU
+   ============================================================================ */
+
+QMenuBar {
+    background-color: @bg-deep;
+    color: @text-ink;
+    border-bottom: 1px solid @border-subtle;
+    padding: 4px;
+}
+
+QMenuBar::item {
+    background-color: transparent;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+QMenuBar::item:selected {
+    background-color: @bg-paper;
+}
+
+QMenu {
+    background-color: @bg-paper;
+    border: 1px solid @border-subtle;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+QMenu::item {
+    padding: 10px 24px;
+    border-radius: 4px;
+    color: @text-ink;
+}
+
+QMenu::item:selected {
+    background-color: @accent-amber;
+    color: @bg-deep;
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: @border-subtle;
+    margin: 4px 8px;
+}
+
+/* ============================================================================
+   SPLITTER
+   ============================================================================ */
+
+QSplitter::handle {
+    background-color: @border-subtle;
+    width: 2px;
+    height: 2px;
+}
+
+QSplitter::handle:hover {
+    background-color: @accent-amber;
+}
+
+/* ============================================================================
+   PROGRESS BAR
+   ============================================================================ */
+
+QProgressBar {
+    background-color: @input-bg;
+    border: 1px solid @input-border;
+    border-radius: 6px;
+    text-align: center;
+    color: @text-ink;
+    font-size: 11px;
+    height: 20px;
+}
+
+QProgressBar::chunk {
+    background-color: @accent-amber;
+    border-radius: 5px;
+}
+
+/* ============================================================================
+   CHECKBOX / RADIO
+   ============================================================================ */
+
+QCheckBox, QRadioButton {
+    color: @text-ink;
+    spacing: 10px;
+    font-size: 13px;
+}
+
+QCheckBox::indicator, QRadioButton::indicator {
+    width: 18px;
+    height: 18px;
+    border: 2px solid @input-border;
+    background-color: @input-bg;
+    border-radius: 4px;
+}
+
+QRadioButton::indicator {
+    border-radius: 9px;
+}
+
+QCheckBox::indicator:checked {
+    background-color: @accent-amber;
+    border-color: @accent-amber;
+    image: url(:/icons/check.svg);
+}
+
+QRadioButton::indicator:checked {
+    background-color: @input-bg;
+    border-color: @accent-amber;
+}
+
+QRadioButton::indicator:checked::after {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: @accent-amber;
+    margin: 3px;
+}
+
+QCheckBox::indicator:hover, QRadioButton::indicator:hover {
+    border-color: @accent-amber;
+}
+
+/* ============================================================================
+   GROUP BOX
+   ============================================================================ */
+
+QGroupBox {
+    background-color: transparent;
+    border: 1px solid @border-subtle;
+    border-radius: 8px;
+    margin-top: 16px;
+    padding-top: 16px;
+    font-weight: 600;
+    color: @text-ink;
+    font-family: "Georgia", "Crimson Pro", serif;
+    font-size: 14px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 12px;
+    left: 16px;
+    top: -8px;
+    background-color: @bg-deep;
+    color: @accent-amber;
+}
+
+/* ============================================================================
+   STATUS BAR
+   ============================================================================ */
+
+QStatusBar {
+    background-color: @bg-paper;
+    border-top: 1px solid @border-subtle;
+    color: @text-muted;
+    font-size: 11px;
+    padding: 4px 12px;
+}
+
+/* ============================================================================
+   DIALOGS
+   ============================================================================ */
+
+QDialog {
+    background-color: @bg-deep;
+}
+
+QDialog QDialogButtonBox {
+    background-color: transparent;
+}
+
+/* ============================================================================
+   TREE VIEW (for nested data like education/experience)
+   ============================================================================ */
+
+QTreeView, QTreeWidget {
+    background-color: @bg-deep;
+    alternate-background-color: @bg-paper;
+    border: 1px solid @border-subtle;
+    border-radius: 8px;
+    outline: none;
+    show-decoration-selected: 1;
+}
+
+QTreeView::item, QTreeWidget::item {
+    padding: 8px 12px;
+    border: none;
+}
+
+QTreeView::item:selected, QTreeWidget::item:selected {
+    background-color: @accent-amber;
+    color: @bg-deep;
+}
+
+QTreeView::branch, QTreeWidget::branch {
+    background-color: transparent;
+}
+
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeWidget::branch:has-children:!has-siblings:closed {
+    border-image: none;
+    image: url(:/icons/chevron-right.svg);
+}
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeWidget::branch:open:has-children:!has-siblings {
+    border-image: none;
+    image: url(:/icons/chevron-down.svg);
+}
+
+/* ============================================================================
+   CUSTOM PROPERTY SELECTORS FOR DYNAMIC STYLING
+   ============================================================================ */
+
+/* Status badges */
+.status-new {
+    color: @accent-amber;
+    font-weight: 600;
+}
+
+.status-applied {
+    color: @success-green;
+    font-weight: 600;
+}
+
+.status-skipped {
+    color: @text-dim;
+    font-weight: 600;
+}
+
+/* Field status indicators */
+.field-filled {
+    color: @success-green;
+}
+
+.field-skipped {
+    color: @warning-amber;
+}
+
+.field-error {
+    color: @error-red;
+}
+
+/* Loading state */
+.loading {
+    color: @text-muted;
+    font-style: italic;
+}
+
+/* ============================================================================
+   RESPONSIVE / HIGH DPI ADJUSTMENTS
+   ============================================================================ */
+
+/* These will be applied programmatically based on screen DPI */
+.high-dpi QWidget {
+    font-size: 14px;
+}
+
+.high-dpi QPushButton {
+    padding: 12px 24px;
+    min-height: 24px;
+}
+
+.high-dpi #urlBar, .high-dpi QLineEdit.urlBar {
+    padding: 16px 20px;
+    font-size: 16px;
+}
